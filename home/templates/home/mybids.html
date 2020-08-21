@@ -6,6 +6,9 @@
 <head>
     <link rel="stylesheet" href="{% static 'home/css/trading/bootstrap-iso.css' %}" />
     <link rel="stylesheet" href="{% static 'home/css/trading/css/bootstrap.min.css' %}" />
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.13.1/css/all.css'
+        integrity='sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q' crossorigin='anonymous'>
+
     <title>Hawkeye-Money Never Sleeps</title>
     <style type="text/css">
         img.wp-smiley,
@@ -296,6 +299,18 @@
                 align-content: center;
             }
         }
+
+        .download-btn {
+            float: right !important;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            .download-btn {
+                margin-top: 2%;
+                float: left !important;
+            }
+        }
     </style>
 </head>
 {% endblock head %}
@@ -343,9 +358,9 @@ vc_responsive"
                                             style="width: 100%; height: 100%;padding-top: 35%; text-align:center;font-weight:800;font-style:normal;text-decoration:none;font-family:Lato;font-size:100px;line-height:120px;color:#ffffff; text-align: center;"
                                             data-ls="showinfo:1;parallax:true;parallaxlevel:-18;parallaxtype:3d;parallaxevent:scroll;parallaxaxis:y;"
                                             data-ls="showinfo:1;parallax:true;parallaxlevel:-18;parallaxtype:3d;parallaxevent:scroll;parallaxaxis:y;">
-                                            LET'S BID!
+                                            YOUR <br> BIDS
                                         </h1>
-                                        <a style="" class="ls-l" href="#" target="_self"
+                                        <a style="" class="ls-l" href="#startup" target="_self"
                                             data-ls="showinfo:1;offsetyin:-50px;delayin:1000;parallax:true;parallaxlevel:-10;parallaxtype:3d;parallaxevent:scroll;parallaxaxis:y;">
 
                                         </a>
@@ -365,18 +380,21 @@ vc_responsive"
     </div>
 
 
+    {% if Trades %}
+    {% for obj in Trades %}
     <div class="row main_body" style="max-width:100% !important; display:flex; justify-content: center;">
+
+
+
         <div class="col-12 col-md-8 col-lg-8 col-sm-12 main_body_center ">
 
-            {% if Bid %}
-            {% for Bidding in Bid %}
             <div id="startup" class="card supcard"
                 style=" margin-top: 30px; border:none; box-shadow: 3px 5px 6px #ccc; padding-bottom: 2%; padding-left: 2%; padding-right: 2%; margin-bottom:30px; margin-left: 2%; margin-right: 2%">
                 <div class="supcard_top" style="max-width:80% !important;">
 
 
                     <div class="card-body" style="margin-top: 15px;">
-                        <h4 class="card-title" style="font-size: 28px;">{{ Bidding.company.company_name }}</h4>
+                        <h4 class="card-title" style="font-size: 28px;">{{ obj.company.company_name }}</h4>
                         <hr>
                     </div>
                 </div>
@@ -384,40 +402,31 @@ vc_responsive"
 
                     <div class="location">
                         <h5 class="card-title" style="margin-bottom: 10px; font-size: 20px;">Current Multiplication Factor:</h5>
-                        <p class="card-text" style=" font-size: 16px;"> {{ Bidding.company.multiplication_factor }} </p>
+                        <p class="card-text" style=" font-size: 16px;">{{ obj.company.multiplication_factor }}</p>
 
                     </div>
-                   
-                    <div class="Start">
-                        <h5 class="card-title" style="margin-bottom: 10px; font-size: 20px;">Highest Bid</h5>
 
-                        <p class="card-text" style=" font-size: 16px;"> {{Bidding.bidding_price}} </p>
+                    <div class="location">
+                        <h5 class="card-title" style="margin-bottom: 10px; font-size: 20px;">Your Bid Price:</h5>
+                        <p class="card-text" style=" font-size: 16px;">{{ obj.highest_bid }} E-Coins</p>
+
                     </div>
+                    <div class="duration">
+                        <h5 class="card-title" style="margin-bottom: 10px; font-size: 20px;"> Share %</h5>
 
+                        <p class="card-text" style=" font-size: 16px;"> {{ obj.percentage_for_sale }}% </p>
+                    </div>
                 </div>
-                <hr>
-                <div class="supcard_mid" style=" margin-bottom: 20px; margin-left: 20px; overflow: visible;">
-
-                    <form class="form1" method="POST" action="{% url 'bidding-update' Bidding.id page %}">
-                        {% csrf_token %}
-                        <br>
-                        {{ form }}
-                        <div class="form-group" >
-                            <input type="submit" value="Place Your Bid">
-                        </div>
-                    </form>
-                    
                 </div>
             </div>
-            {%endfor%}
-            {% else %}
-            <center>
-            <div style="font-size: 50px; line-height: 55px; height: auto; padding-top:90px">No bids available at the moment.</div>
-            </center>
-            {% endif %}
             <br><br><br><br>
+
         </div>
+
+
+        
     </div>
-</div>
+    {% endfor %}
+    {% endif %}
 
 {% endblock body %}
