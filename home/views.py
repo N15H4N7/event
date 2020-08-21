@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .models import Share as var
 from .models import  Bidding as bidvar
 from django.core.paginator import Paginator
+from django.views.defaults import page_not_found, server_error
+
+def handler_404(request, exception):
+	return page_not_found(request, exception, template_name="home/404.html")
+
+def handler_500(request):
+	return server_error(request, template_name="home/500.html")
 
 def coming(request):
 	return render(request, 'home/comingsoon.html')
