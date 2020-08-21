@@ -6,7 +6,7 @@
 <head>
     <link rel="stylesheet" href="{% static 'home/css/trading/bootstrap-iso.css' %}" />
     <link rel="stylesheet" href="{% static 'home/css/trading/css/bootstrap.min.css' %}" />
-    <title>EDC,TIET- Let's Bid</title>
+    <title>Hawkeye-Money Never Sleeps</title>
     <style type="text/css">
         img.wp-smiley,
         img.emoji {
@@ -302,6 +302,8 @@
 
 
 {% block bodytag %}
+
+onload = "JavaScript:AutoRefresh(35000);"
 class="home page-template-default page page-id-17 woocommerce-no-js has-fixed-header wpb-js-composer js-comp-ver-6.0.5
 vc_responsive"
 {% endblock bodytag %}
@@ -368,6 +370,7 @@ vc_responsive"
 
             {% if Bid %}
             {% for Bidding in Bid %}
+            {% if Bidding.visible %}
             <div id="startup" class="card supcard"
                 style=" margin-top: 30px; border:none; box-shadow: 3px 5px 6px #ccc; padding-bottom: 2%; padding-left: 2%; padding-right: 2%; margin-bottom:30px; margin-left: 2%; margin-right: 2%">
                 <div class="supcard_top" style="max-width:80% !important;">
@@ -452,7 +455,12 @@ vc_responsive"
                     <!-- </div> -->
                 </div>
             </div>
+            {% endif %}
             {%endfor%}
+            {% else %}
+            <center>
+            <div style="font-size: 70px; line-height: 70px; height: auto; padding-top:90px">Coming Soon!</div>
+            </center>
             {% endif %}
             <br><br><br><br>
 <!--             <div class="wrapper">

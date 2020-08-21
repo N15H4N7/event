@@ -6,7 +6,7 @@
 <head>
     <link rel="stylesheet" href="{% static 'home/css/trading/bootstrap-iso.css' %}" />
     <link rel="stylesheet" href="{% static 'home/css/trading/css/bootstrap.min.css' %}" />
-    <title>EDC,TIET- Trading</title>
+    <title>Hawkeye-Money Never Sleeps</title>
     <style type="text/css">
         img.wp-smiley,
         img.emoji {
@@ -302,6 +302,8 @@
 
 
 {% block bodytag %}
+
+onload = "JavaScript:AutoRefresh(35000);"
 class="home page-template-default page page-id-17 woocommerce-no-js has-fixed-header wpb-js-composer js-comp-ver-6.0.5
 vc_responsive"
 {% endblock bodytag %}
@@ -456,6 +458,10 @@ vc_responsive"
                                     </div>
             {% endwith %}
             {% endfor %}
+            {% else %}
+            <center>
+            <div style="font-size: 70px; line-height: 70px; height: auto; padding-top:90px">Coming Soon!</div>
+            </center>
             {% endif %}
 
 
